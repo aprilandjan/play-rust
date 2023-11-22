@@ -3,6 +3,7 @@ use std::io::{stdout, BufWriter};
 
 // "import * as lifetimes from './lifetimes'" equivalent in rust
 mod lifetimes;
+mod closure;
 
 fn main() {
     println!("Hello, world!");
@@ -17,5 +18,7 @@ fn main() {
     let mut writer = BufWriter::new(stdout.lock());
     say(message.as_bytes(), width + 20, &mut writer).unwrap();
 
-    lifetimes::test_lifetimes()
+    lifetimes::test_lifetimes();
+
+    closure::create_node_tree();
 }
