@@ -38,6 +38,21 @@ pub fn create_node_tree() {
   println!("complete node list: {:?}", list);
   // TODO: convert the list into a tree
 
+  // let mut findParentTree = |tree: TreeNode, id: i32| -> Option<TreeNode> {
+  //   if tree.id == id {
+  //     return Some(tree);
+  //   }
+  //   if tree.children.len() == 0 {
+  //     return None;
+  //   }
+  //   let p = tree.children.iter_mut().find(|c| {
+  //     // FIXME: it seems it is very hard to create a recursive closure?...
+  //     findParentTree(c, id)
+  //   });
+
+  //   return Some(tree);
+  // };
+
   let mut trees: Vec<TreeNode> = vec![];
   for node in list.iter() {
     // if a node cannot find its parent in the list
