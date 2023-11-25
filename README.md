@@ -2,6 +2,19 @@
 
 A beginner's rust-lang exploration :)
 
+## add dependencies
+
+```bash
+$ cargo add ferris-says
+```
+
+## build & run
+
+```bash
+$ cargo build
+$ cargo run
+```
+
 ## Thoughts
 
 1. No need to write parentheses in `if` `for` control flow statement
