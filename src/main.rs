@@ -4,6 +4,7 @@ use std::io::{stdout, BufWriter};
 // "import * as lifetimes from './lifetimes'" equivalent in rust
 mod lifetimes;
 mod closure;
+mod smart_pointers;
 
 fn main() {
     println!("Hello, world!");
@@ -21,4 +22,6 @@ fn main() {
     lifetimes::test_lifetimes();
 
     closure::create_node_tree();
+
+    smart_pointers::box_value_in_heap();
 }

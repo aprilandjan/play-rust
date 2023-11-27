@@ -37,6 +37,7 @@ pub fn create_node_tree() {
   let list = generate_node_list(30);
   println!("complete node list: {:?}", list);
   // TODO: convert the list into a tree
+  // forget about it right now...
 
   // let mut findParentTree = |tree: TreeNode, id: i32| -> Option<TreeNode> {
   //   if tree.id == id {
