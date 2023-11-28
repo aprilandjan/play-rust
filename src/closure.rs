@@ -64,7 +64,7 @@ pub fn create_node_tree() {
 
     // put root into trees list
     match parent {
-        Some(p) => {
+        Some(_p) => {
           println!("find parent node for node #{:?}", node);
           // FIXME: should iterate through all deps
           let parent_tree = trees.iter_mut().find(|t| {
