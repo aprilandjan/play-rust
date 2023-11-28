@@ -24,4 +24,6 @@ fn main() {
     closure::create_node_tree();
 
     smart_pointers::box_value_in_heap();
+    smart_pointers::drop_automatically_when_leave();
+    smart_pointers::drop_manually();
 }
