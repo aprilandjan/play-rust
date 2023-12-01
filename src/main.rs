@@ -15,4 +15,5 @@ fn main() {
     smart_pointers::box_value_in_heap();
     smart_pointers::drop_automatically_when_leave();
     smart_pointers::drop_manually();
+    smart_pointers::multiple_references_over_one_value();
 }
