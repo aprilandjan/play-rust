@@ -3,6 +3,7 @@ mod hello;
 mod lifetimes;
 mod closure;
 mod smart_pointers;
+mod concurrency;
 
 
 fn main() {
@@ -16,4 +17,6 @@ fn main() {
     smart_pointers::drop_automatically_when_leave();
     smart_pointers::drop_manually();
     smart_pointers::multiple_references_over_one_value();
+
+    concurrency::thread_do_not_guaranty_exec_order();
 }
