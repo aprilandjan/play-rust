@@ -19,4 +19,5 @@ fn main() {
     smart_pointers::multiple_references_over_one_value();
 
     concurrency::thread_do_not_guaranty_exec_order();
+    concurrency::wait_for_thread_done();
 }
