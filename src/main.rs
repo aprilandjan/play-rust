@@ -20,4 +20,5 @@ fn main() {
 
     concurrency::thread_do_not_guaranty_exec_order();
     concurrency::wait_for_thread_done();
+    concurrency::lock_threads_using_mutex_or_not();
 }
