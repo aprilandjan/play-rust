@@ -4,6 +4,7 @@ mod lifetimes;
 mod closure;
 mod smart_pointers;
 mod concurrency;
+mod http_server;
 
 
 fn main() {
@@ -21,4 +22,6 @@ fn main() {
     concurrency::thread_do_not_guaranty_exec_order();
     concurrency::wait_for_thread_done();
     concurrency::lock_threads_using_mutex_or_not();
+
+    http_server::serve();
 }
