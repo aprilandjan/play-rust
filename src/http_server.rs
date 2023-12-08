@@ -8,11 +8,11 @@ pub fn serve() {
   for stream in listener.incoming() {
     let stream = stream.unwrap();
     println!("incoming connection established");
-    handleRequest(stream);
+    handle_stream(stream);
   }
 }
 
-fn handleRequest(mut stream: TcpStream) {
+fn handle_stream(mut stream: TcpStream) {
   let buffer_reader = BufReader::new(&stream);
   let req: Vec<_> = buffer_reader
     .lines()
@@ -20,6 +20,7 @@ fn handleRequest(mut stream: TcpStream) {
     .take_while(|item|{!item.is_empty()}) // filter empty lines
     .collect(); // lazy execute the iterator
 
-  // so what does ':#?' meaning?...
+  // ':#?' means pretty-print the `Debug` formatting, with line-breaks and indentation
+  // see https://doc.rust-lang.org/std/fmt/index.html#sign0
   println!("Request: {:#?}", req);
 }
