@@ -1,5 +1,7 @@
 use std::{net::{TcpListener, TcpStream}, io::{BufReader, BufRead}};
 
+use crate::thread_pool;
+
 pub fn serve() {
   println!("start http server...");
 
@@ -12,7 +14,7 @@ pub fn serve() {
   }
 }
 
-fn handle_stream(mut stream: TcpStream) {
+fn handle_stream(stream: TcpStream) {
   let buffer_reader = BufReader::new(&stream);
   let req: Vec<_> = buffer_reader
     .lines()

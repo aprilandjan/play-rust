@@ -1,11 +1,13 @@
 mod hello;
 // "import * as lifetimes from './lifetimes'" equivalent in rust
+// ...no it's not 'import', just a declaration(and should be declared somewhere once?)
+// see https://www.reddit.com/r/learnrust/comments/ms4nz2/rust_module_importing/
 mod lifetimes;
 mod closure;
 mod smart_pointers;
 mod concurrency;
 mod http_server;
-
+mod thread_pool;
 
 fn main() {
     hello::hello();
