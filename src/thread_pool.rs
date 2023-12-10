@@ -14,14 +14,28 @@ struct Worker {
 
 impl Worker {
   fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-    let thread = thread::spawn(||{
-      receiver;
+    let thread = thread::spawn(move ||{
+      // so, the worker run loop endlessly to receive possible jobs
+      // will that takes up cpu?
+      loop {
+        // so many unwrap...
+        // the lock might error if the thread owning the lock crashed
+        // the recv might error if the channel closed
+        // and the recv will block and pending, if there's no incoming jobs
+        // so probably the 'loop' wont takes up much cpu
+        let job = receiver.lock().unwrap().recv().unwrap();
+        println!("worker {} got a job, executing it now...", id);
+        job();
+        println!("worker {} job done!", id);
+      }
     });
     Worker { id, thread }
   }
 }
 
-struct Job {}
+// struct Job {}
+/// alias to a trait that holds some 'job closure';
+type Job = Box<dyn FnOnce() + Send + 'static>;
 
 impl ThreadPool {
   pub fn new(size: usize) -> ThreadPool {
@@ -45,11 +59,14 @@ impl ThreadPool {
     }
   }
 
-  // mimic behavior of `thread`
+  // mimic behavior of `thread`, which accepts a 'job closure'
   pub fn execute<F>(&self, f: F) where
   F: FnOnce() + Send + 'static
   {
     // TODO:
+    let job = Box::new(f);
+    // send the job closure via message channel
+    self.sender.send(job).unwrap(); // incase that error happened
   }
 }
 
