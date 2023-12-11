@@ -15,6 +15,13 @@ $ cargo build
 $ cargo run
 ```
 
+## format & prettify
+
+```bash
+$ cargo fmt
+$ cargo fix
+```
+
 ## Thoughts
 
 1. No need to write parentheses in `if` `for` control flow statement
