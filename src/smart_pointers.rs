@@ -18,17 +18,17 @@ pub fn box_value_in_heap() {
 }
 
 pub fn drop_automatically_when_leave() {
-    let a = CustomSmartPointer {
+    let _a = CustomSmartPointer {
         data: String::from("hello"),
     };
-    let b = CustomSmartPointer {
+    let _b = CustomSmartPointer {
         data: String::from("world"),
     };
     println!("going to leave...");
 }
 
 pub fn drop_manually() {
-    let a = CustomSmartPointer {
+    let _a = CustomSmartPointer {
         data: String::from("hello"),
     };
     let b = CustomSmartPointer {

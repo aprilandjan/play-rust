@@ -1,6 +1,6 @@
-use std::rc::Rc;
+
 use std::sync::{Arc, Mutex};
-use std::thread::{self, JoinHandle, Thread};
+use std::thread::{self};
 use std::time::Duration;
 
 pub fn thread_do_not_guaranty_exec_order() {

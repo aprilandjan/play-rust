@@ -1,6 +1,6 @@
 use std::marker::Send;
 use std::sync::{mpsc, Arc, Mutex};
-use std::thread::{self, Thread}; // message channel
+use std::thread::{self}; // message channel
 
 pub struct ThreadPool {
     workers: Vec<Worker>,
