@@ -8,7 +8,7 @@ use std::{
 
 use crate::thread_pool::ThreadPool;
 
-pub fn serve() {
+pub fn serve_and_shut_down() {
     println!("");
     println!("start http server...");
 
@@ -16,13 +16,16 @@ pub fn serve() {
 
     let pool = ThreadPool::new(4);
 
-    for stream in listener.incoming() {
+    // `take` makes the iterator yield at specific count
+    for stream in listener.incoming().take(2) {
         let stream = stream.unwrap();
         println!("incoming connection established");
         pool.execute(|| {
             handle_stream(stream);
         });
     }
+
+    println!("http server shut down.");
 }
 
 fn handle_stream(mut stream: TcpStream) {

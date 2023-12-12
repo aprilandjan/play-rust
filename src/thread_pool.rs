@@ -1,15 +1,16 @@
 use std::marker::Send;
 use std::sync::{mpsc, Arc, Mutex};
-use std::thread; // message channel
+use std::thread::{self, Thread}; // message channel
 
 pub struct ThreadPool {
     workers: Vec<Worker>,
-    sender: mpsc::Sender<Job>,
+    sender: Option<mpsc::Sender<Job>>,
 }
 
 struct Worker {
     id: usize,
-    thread: thread::JoinHandle<()>,
+    // use `Option` to move ownership manually
+    thread: Option<thread::JoinHandle<()>>,
 }
 
 impl Worker {
@@ -23,13 +24,27 @@ impl Worker {
                 // the recv might error if the channel closed
                 // and the recv will block and pending, if there's no incoming jobs
                 // so probably the 'loop' wont takes up much cpu
-                let job = receiver.lock().unwrap().recv().unwrap();
-                println!("worker {} got a job, executing it now...", id);
-                job();
-                println!("worker {} job done!", id);
+                let job = receiver.lock().unwrap().recv();
+
+                match job {
+                    Ok(job) => {
+                        println!("worker {} got a job, executing it now...", id);
+                        job();
+                        println!("worker {} job done!", id);
+                    }
+                    Err(_) => {
+                        // if the channel closed, then 'recv' will through error
+                        // just break the loop
+                        println!("worker {id} disconnected; shutting down.");
+                        break;
+                    }
+                }
             }
         });
-        Worker { id, thread }
+        Worker {
+            id,
+            thread: Some(thread),
+        }
     }
 }
 
@@ -53,7 +68,10 @@ impl ThreadPool {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
 
-        ThreadPool { workers, sender }
+        ThreadPool {
+            workers,
+            sender: Some(sender),
+        }
     }
 
     // mimic behavior of `thread`, which accepts a 'job closure'
@@ -64,6 +82,27 @@ impl ThreadPool {
         // TODO:
         let job = Box::new(f);
         // send the job closure via message channel
-        self.sender.send(job).unwrap(); // incase that error happened
+        self.sender
+            .as_ref()
+            .unwrap() // so why as_ref?...hard to understand
+            .send(job)
+            .unwrap(); // incase that error happened
+    }
+}
+
+// make sure when the pool is dropped, jobs on each thread are finished
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        // move sender out of thread pool
+        // then close it, which makes no more messages sent
+        drop(self.sender.take());
+
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+            if let Some(thread) = worker.thread.take() {
+                // the `join` takes ownership
+                thread.join().unwrap();
+            }
+        }
     }
 }

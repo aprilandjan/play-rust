@@ -25,5 +25,5 @@ fn main() {
     concurrency::wait_for_thread_done();
     concurrency::lock_threads_using_mutex_or_not();
 
-    http_server::serve();
+    http_server::serve_and_shut_down();
 }
