@@ -40,7 +40,7 @@ $ cargo fix
     use super::utils;   // from 'parent directory' to find the module
     ```
 
-7. When I want to use a **un-exported** or **indirect** type from a dependency, for example, a return type from a `new`, it is painful. There's no such thing like typescript `ReturnType<fn>`, had to find where the exact typings are from, and `cargo add` that exact version of dep([ref](https://stackoverflow.com/questions/65897257/how-to-use-a-type-from-dependences-dependence)).
+7. When I want to use a **un-exported** or **indirect** type from a dependency, for example, a return type from a `new`, it is painful. There's no such thing like typescript `ReturnType<fn>`, had to find where the exact typings are from, and `cargo add` that exact version of dep([ref1](https://stackoverflow.com/questions/65897257/how-to-use-a-type-from-dependences-dependence), [ref2](https://users.rust-lang.org/t/how-does-transitive-dependency-work-with-type-inference-and-compilation/93264/2)).
 
 ## References
 
