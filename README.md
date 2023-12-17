@@ -40,6 +40,8 @@ $ cargo fix
     use super::utils;   // from 'parent directory' to find the module
     ```
 
+7. When I want to use a **un-exported** or **indirect** type from a dependency, for example, a return type from a `new`, it is painful. There's no such thing like typescript `ReturnType<fn>`, had to find where the exact typings are from, and `cargo add` that exact version of dep([ref](https://stackoverflow.com/questions/65897257/how-to-use-a-type-from-dependences-dependence)).
+
 ## References
 
 - <https://www.rust-lang.org/learn/get-started>
