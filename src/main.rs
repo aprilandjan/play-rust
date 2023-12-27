@@ -8,6 +8,7 @@ mod http_server;
 mod lifetimes;
 mod smart_pointers;
 mod thread_pool;
+mod try_enum;
 
 fn main() {
     hello::hello();
@@ -25,5 +26,7 @@ fn main() {
     concurrency::wait_for_thread_done();
     concurrency::lock_threads_using_mutex_or_not();
 
-    http_server::serve_and_shut_down();
+    // http_server::serve_and_shut_down();
+
+    try_enum::output_random_enum_structured_enum_value();
 }
