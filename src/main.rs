@@ -9,6 +9,7 @@ mod lifetimes;
 mod smart_pointers;
 mod thread_pool;
 mod try_enum;
+mod from_and_into;
 
 fn main() {
     hello::hello();
@@ -29,4 +30,6 @@ fn main() {
     // http_server::serve_and_shut_down();
 
     try_enum::output_random_enum_structured_enum_value();
+
+    from_and_into::convert_address_to_location();
 }
