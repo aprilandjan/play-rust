@@ -10,6 +10,7 @@ mod smart_pointers;
 mod thread_pool;
 mod try_enum;
 mod from_and_into;
+mod iterator;
 
 fn main() {
     hello::hello();
@@ -32,4 +33,6 @@ fn main() {
     try_enum::output_random_enum_structured_enum_value();
 
     from_and_into::convert_address_to_location();
+
+    iterator::filter_numeric_value_in_vec();
 }
