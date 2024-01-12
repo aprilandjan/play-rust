@@ -11,6 +11,7 @@ mod thread_pool;
 mod try_enum;
 mod from_and_into;
 mod iterator;
+mod generic;
 
 fn main() {
     hello::hello();
@@ -35,4 +36,6 @@ fn main() {
     from_and_into::convert_address_to_location();
 
     iterator::filter_numeric_value_in_vec();
+
+    generic::call_generic_function_for_num();
 }
