@@ -3,7 +3,7 @@ pub fn filter_numeric_value_in_vec() {
 
   // here, `into_iter` gets the reference of the numeric element
   // so we need to use `deref` operator to get the value
-  let b: Vec<u32> = list.into_iter().filter(|v| *v != 0).collect();
+  let b: Vec<u32> = a.into_iter().filter(|v| *v != 0).collect();
   println!("filtered list: {:?}", b);
 
   // besides, `into_iter` takes ownership of the vec
