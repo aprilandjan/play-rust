@@ -1,4 +1,4 @@
-use std::fs;
+use std::{fs, path};
 use std::{
     io::{BufRead, BufReader, Write},
     net::{TcpListener, TcpStream},
@@ -6,7 +6,10 @@ use std::{
     time::Duration,
 };
 
-use crate::thread_pool::ThreadPool;
+#[path ="./5_thread_pool.rs"]
+mod thread_pool;
+
+use thread_pool::ThreadPool;
 
 pub fn serve_and_shut_down() {
     println!("");
