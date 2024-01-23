@@ -28,4 +28,6 @@ fn main() {
     lessons::iterator::filter_numeric_value_in_vec();
 
     lessons::generic::call_generic_function_for_num();
+
+    lessons::structure_with_ref_members::a_person_with_a_cat();
 }

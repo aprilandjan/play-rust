@@ -35,3 +35,6 @@ pub mod iterator;
 
 #[path ="./9_generic.rs"]
 pub mod generic;
+
+#[path="./10_structure_with_ref_members.rs"]
+pub mod structure_with_ref_members;
