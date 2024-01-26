@@ -38,6 +38,11 @@ impl<'a> PersonBorrowTheCat<'a> {
   }
 }
 
+#[derive(Debug)]
+struct ParentOfThePersonBorrowTheCat<'a> {
+  child: &'a PersonBorrowTheCat<'a>,
+}
+
 pub fn a_person_with_a_cat() {
   let kitty = Cat {
     name: String::from("kitty"),
@@ -73,4 +78,8 @@ pub fn a_person_with_a_cat() {
   println!("person borrow the cat: {:?}", tim);
 
   tim.tick();
+
+  let father = ParentOfThePersonBorrowTheCat {
+    child: &tim,
+  };
 }
